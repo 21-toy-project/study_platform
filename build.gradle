@@ -1,6 +1,13 @@
+buildscript {
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
 plugins {
-    id 'org.springframework.boot' version '2.6.5'
+    id 'org.springframework.boot' version '2.6.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id 'java'
 }
 
@@ -12,6 +19,7 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+    querydsl.extendsFrom compileClasspath
 }
 
 repositories {
@@ -19,23 +27,55 @@ repositories {
 }
 
 dependencies {
+    // monitoring
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    // jdbc
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    // jpa
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // spring security
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    // spring boot
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    // db
+    runtimeOnly 'com.h2database:h2'
+    // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+    // queryDSL
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    annotationProcessor(
+            "javax.persistence:javax.persistence-api",
+            "javax.annotation:javax.annotation-api",
+            "com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
 
-    // DB관련
-    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.2.0'
-//    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
-    implementation group: 'org.mybatis', name: 'mybatis-typehandlers-jsr310', version: '1.0.2'
-    implementation group: 'org.mybatis', name: 'mybatis-spring', version: '2.0.6'
-    implementation 'mysql:mysql-connector-java'
+}
+
+// queryDSL
+def querydslDir = "$buildDir/generated"
+
+querydsl {
+    library = "com.querydsl:querydsl-apt"
+    jpa = true
+    querydslDefault = true
+    querydslSourcesDir = querydslDir
+}
+sourceSets {
+    main.java.srcDir querydslDir
+}
+compileQuerydsl{
+    options.annotationProcessorPath = configurations.querydsl
+}
+compileQuerydsl.doFirst {
+    if (file(querydslDir))
+        delete(file(querydslDir))
+}
+tasks.withType(JavaCompile){
+    options.generatedSourceOutputDirectory = file(querydslDir)
+}
+clean.doLast {
+    delete file(querydslDir)
 }
 
 tasks.named('test') {
