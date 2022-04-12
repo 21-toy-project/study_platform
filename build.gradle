@@ -11,7 +11,7 @@ plugins {
     id 'java'
 }
 
-group = 'com.toy'
+group = 'toy'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
