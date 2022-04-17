@@ -26,4 +26,6 @@ public class PostTest {
         assertEquals(post.getContent(), content);
         assertEquals(post.getWriterId(), writerId);
     }
+
+
 }
