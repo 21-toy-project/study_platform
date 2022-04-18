@@ -55,23 +55,27 @@ dependencies {
 }
 
 // queryDSL
-def querydslDir = "$buildDir/generated/querydsl"
+def querydslDir = "$buildDir"
 querydsl {
     jpa = true
     querydslSourcesDir = querydslDir
 }
 sourceSets {
-    main.java.srcDirs = ['src/main/java', querydslDir]
+    main.java.srcDir querydslDir
 }
-compileQuerydsl{
-    options.annotationProcessorPath = configurations.querydsl
-}
+
 compileQuerydsl.doFirst {
     if (file(querydslDir))
         delete(file(querydslDir))
 }
-tasks.withType(JavaCompile){
-    options.generatedSourceOutputDirectory = file(querydslDir)
+
+compileQuerydsl{
+    options.annotationProcessorPath = configurations.querydsl
+}
+
+compileJava.doFirst {
+    if (file(querydslDir))
+        delete(file(querydslDir))
 }
 
 clean.doLast {
