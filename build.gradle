@@ -57,13 +57,11 @@ dependencies {
 // queryDSL
 def querydslDir = "$buildDir/generated/querydsl"
 querydsl {
-    library = "com.querydsl:querydsl-apt"
     jpa = true
-    querydslDefault = true
     querydslSourcesDir = querydslDir
 }
 sourceSets {
-    main.java.srcDir querydslDir
+    main.java.srcDirs = ['src/main/java', querydslDir]
 }
 compileQuerydsl{
     options.annotationProcessorPath = configurations.querydsl
@@ -75,6 +73,7 @@ compileQuerydsl.doFirst {
 tasks.withType(JavaCompile){
     options.generatedSourceOutputDirectory = file(querydslDir)
 }
+
 clean.doLast {
     delete file(querydslDir)
 }
