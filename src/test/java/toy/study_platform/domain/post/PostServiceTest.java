@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.util.ReflectionTestUtils;
 import toy.study_platform.domain.post.dto.PostSaveRequestDto;
 import toy.study_platform.domain.post.entity.Post;
@@ -20,6 +21,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
+@TestPropertySource("classpath:application-test.properties")
 public class PostServiceTest {
     @Mock
     private PostRepository postRepository;
@@ -47,10 +49,10 @@ public class PostServiceTest {
                 .willReturn(Optional.ofNullable(post));
 
         // when
-        Long newPostId = postService.add(postSaveRequestDto, writerId);
+        Post savedPost = postService.add(postSaveRequestDto, writerId);
 
         // then
-        Post findPost = postRepository.findById(newPostId).get();
+        Post findPost = postRepository.findById(savedPost.getId()).get();
         assertEquals(post.getId(), findPost.getId());
         assertEquals(post.getTitle(), findPost.getTitle());
         assertEquals(post.getContent(), findPost.getContent());
