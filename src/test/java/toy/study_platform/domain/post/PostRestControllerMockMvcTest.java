@@ -4,24 +4,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import toy.study_platform.domain.post.dto.PostSaveRequestDto;
 import toy.study_platform.domain.post.entity.Post;
-import toy.study_platform.domain.post.repository.PostRepository;
 import toy.study_platform.domain.post.service.PostService;
 
 import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
@@ -63,7 +57,7 @@ public class PostRestControllerMockMvcTest {
                 .build();
         ReflectionTestUtils.setField(post, "id", postId);
 
-        given(postService.add(any(), any())).willReturn(post);
+        given(postService.save(any(), any())).willReturn(post);
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/posts")

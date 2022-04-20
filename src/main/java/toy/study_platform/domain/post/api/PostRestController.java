@@ -22,7 +22,7 @@ public class PostRestController {
     public ResponseEntity<?> savePost(@Validated @RequestBody PostSaveRequestDto dto) {
         // reqeust header의 토큰값에서 사용자 정보 파싱한 뒤 entity에 추가
         Long writerId = 0L;
-        Post savedPost = postCreateService.add(dto, writerId);
+        Post savedPost = postCreateService.save(dto, writerId);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedPost);
     }
 }
