@@ -1,6 +1,7 @@
 package toy.study_platform.domain.post.entity;
 
-import toy.study_platform.global.common.entity.BaseTimeEntity;
+
+import toy.study_platform.common.entity.BaseTimeEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

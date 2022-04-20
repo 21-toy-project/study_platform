@@ -1,4 +1,4 @@
-package toy.study_platform.global.common.entity;
+package toy.study_platform.common.entity;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
