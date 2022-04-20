@@ -49,7 +49,7 @@ public class PostServiceTest {
                 .willReturn(Optional.ofNullable(post));
 
         // when
-        Post savedPost = postService.add(postSaveRequestDto, writerId);
+        Post savedPost = postService.save(postSaveRequestDto, writerId);
 
         // then
         Post findPost = postRepository.findById(savedPost.getId()).get();

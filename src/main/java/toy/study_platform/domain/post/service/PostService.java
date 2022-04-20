@@ -15,7 +15,7 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public Post add(PostSaveRequestDto postSaveRequestDto, Long writerId) {
+    public Post save(PostSaveRequestDto postSaveRequestDto, Long writerId) {
         return postRepository.save(postSaveRequestDto.toEntity(writerId));
     }
 }
