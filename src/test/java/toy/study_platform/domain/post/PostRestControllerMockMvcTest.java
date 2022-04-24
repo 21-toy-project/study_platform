@@ -40,7 +40,7 @@ public class PostRestControllerMockMvcTest {
 
     @Test
     @DisplayName("post 생성 요청 성공 테스트")
-    public void 정상적인_post_생성_요청_처리() throws Exception {
+    public void post_생성_요청_처리_성공() throws Exception {
         // given
         Long postId = 0L;
         String title = "test-title-1";

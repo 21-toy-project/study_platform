@@ -29,8 +29,8 @@ public class PostServiceTest {
     private PostCreator postService;
 
     @Test
-    @DisplayName("새 post 저장 서비스 확인")
-    public void post_저장_서비스() throws Exception {
+    @DisplayName("새 post 저장 서비스 성공 테스트")
+    public void post_저장_서비스_성공() throws Exception {
         // given
         Long postId = 0L;
         String title = "test-title-1";
