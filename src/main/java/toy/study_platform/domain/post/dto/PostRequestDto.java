@@ -5,7 +5,7 @@ import toy.study_platform.domain.post.entity.Post;
 
 import javax.validation.constraints.NotBlank;
 
-public class PostSaveRequestDto {
+public class PostRequestDto {
     @JsonProperty
     @NotBlank
     private String title;
@@ -13,10 +13,10 @@ public class PostSaveRequestDto {
     @NotBlank
     private String content;
 
-    public PostSaveRequestDto() {
+    public PostRequestDto() {
     }
 
-    public PostSaveRequestDto(String title, String content) {
+    public PostRequestDto(String title, String content) {
         this.title = title;
         this.content = content;
     }
