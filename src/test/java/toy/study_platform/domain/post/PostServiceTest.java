@@ -36,7 +36,7 @@ public class PostServiceTest {
         String title = "test-title-1";
         String content = "test-content-1";
         Long writerId = 0L;
-        PostRequestDto postRequestDto = new PostRequestDto(title, content);
+        PostRequestDto postRequestDto = PostRequestDto.of(title, content);
         Post post = postRequestDto.toEntity(writerId);
         // test를 위해 generated value를 임의로 지정한다
         ReflectionTestUtils.setField(post, "id", postId);

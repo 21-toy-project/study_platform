@@ -46,7 +46,7 @@ public class PostRestControllerMockMvcTest {
         String title = "test-title-1";
         String content = "test-content-1";
         Long writerId = 0L;
-        PostRequestDto postRequestDto = new PostRequestDto(title, content);
+        PostRequestDto postRequestDto = PostRequestDto.of(title, content);
 
         Post post = new Post.Builder()
                 .title(title)

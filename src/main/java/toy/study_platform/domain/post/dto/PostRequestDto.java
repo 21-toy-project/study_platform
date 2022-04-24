@@ -13,12 +13,11 @@ public class PostRequestDto {
     @NotBlank
     private String content;
 
-    public PostRequestDto() {
-    }
-
-    public PostRequestDto(String title, String content) {
-        this.title = title;
-        this.content = content;
+    public static PostRequestDto of(String title, String content) {
+        PostRequestDto postRequestDto = new PostRequestDto();
+        postRequestDto.title = title;
+        postRequestDto.content = content;
+        return postRequestDto;
     }
 
     public Post toEntity(Long writerId) {
