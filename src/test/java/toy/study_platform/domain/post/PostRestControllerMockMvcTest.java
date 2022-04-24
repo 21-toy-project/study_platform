@@ -15,6 +15,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import toy.study_platform.domain.post.dto.PostRequestDto;
+import toy.study_platform.domain.post.dto.PostResponseDto;
 import toy.study_platform.domain.post.entity.Post;
 import toy.study_platform.domain.post.service.PostCreator;
 
@@ -34,7 +35,7 @@ public class PostRestControllerMockMvcTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private PostCreator postService;
+    private PostCreator postCreator;
 
     ObjectMapper objectMapper = new ObjectMapper();
 
@@ -55,7 +56,9 @@ public class PostRestControllerMockMvcTest {
                 .build();
         ReflectionTestUtils.setField(post, "id", postId);
 
-        given(postService.save(any(), any())).willReturn(post);
+        PostResponseDto postResponseDto = PostResponseDto.from(post);
+
+        given(postCreator.save(any(), any())).willReturn(postResponseDto);
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/posts")
@@ -64,8 +67,8 @@ public class PostRestControllerMockMvcTest {
                     .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                     .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id").value(post.getId()))
-                .andExpect(jsonPath("$.title").value(post.getTitle()));
+                    .andExpect(jsonPath("$.id").value(post.getId()))
+                    .andExpect(jsonPath("$.title").value(post.getTitle()));
 
     }
 }
