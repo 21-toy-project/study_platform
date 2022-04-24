@@ -14,12 +14,10 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import toy.study_platform.domain.post.dto.PostSaveRequestDto;
+import toy.study_platform.domain.post.dto.PostRequestDto;
 import toy.study_platform.domain.post.entity.Post;
-import toy.study_platform.domain.post.service.PostService;
+import toy.study_platform.domain.post.service.PostCreator;
 
-import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
@@ -36,7 +34,7 @@ public class PostRestControllerMockMvcTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private PostService postService;
+    private PostCreator postService;
 
     ObjectMapper objectMapper = new ObjectMapper();
 
@@ -48,7 +46,7 @@ public class PostRestControllerMockMvcTest {
         String title = "test-title-1";
         String content = "test-content-1";
         Long writerId = 0L;
-        PostSaveRequestDto postSaveRequestDto = new PostSaveRequestDto(title, content);
+        PostRequestDto postRequestDto = new PostRequestDto(title, content);
 
         Post post = new Post.Builder()
                 .title(title)
@@ -62,7 +60,7 @@ public class PostRestControllerMockMvcTest {
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/posts")
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper.writeValueAsString(postSaveRequestDto))
+                    .content(objectMapper.writeValueAsString(postRequestDto))
                     .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                     .andExpect(status().isCreated())

@@ -15,7 +15,7 @@ public class PostCreator {
         this.postRepository = postRepository;
     }
 
-    public Post save(PostRequestDto postSaveRequestDto, Long writerId) {
-        return postRepository.save(postSaveRequestDto.toEntity(writerId));
+    public Post save(PostRequestDto postRequestDto, Long writerId) {
+        return postRepository.save(postRequestDto.toEntity(writerId));
     }
 }
