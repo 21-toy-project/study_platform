@@ -1,6 +1,7 @@
 package toy.study_platform.domain.post;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,8 @@ public class PostRepositoryTest {
     private PostRepository postRepository;
 
     @Test
-    public void post_저장() {
+    @DisplayName("post 저장 성공 테스트")
+    public void post_저장_성공() {
         String title = "test-title-1";
         String content = "test-content-1";
         Long writerId = 0L;
