@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.util.ReflectionTestUtils;
 import toy.study_platform.domain.post.dto.PostRequestDto;
+import toy.study_platform.domain.post.dto.PostResponseDto;
 import toy.study_platform.domain.post.entity.Post;
 import toy.study_platform.domain.post.repository.PostRepository;
 import toy.study_platform.domain.post.service.PostCreator;
@@ -26,7 +27,7 @@ public class PostServiceTest {
     private PostRepository postRepository;
 
     @InjectMocks
-    private PostCreator postService;
+    private PostCreator postCreator;
 
     @Test
     @DisplayName("새 post 저장 서비스 성공 테스트")
@@ -40,6 +41,7 @@ public class PostServiceTest {
         Post post = postRequestDto.toEntity(writerId);
         // test를 위해 generated value를 임의로 지정한다
         ReflectionTestUtils.setField(post, "id", postId);
+        PostResponseDto expectedPostResponseDto = PostResponseDto.from(post);
 
         // mocking
         given(postRepository.save(any()))
@@ -48,13 +50,14 @@ public class PostServiceTest {
                 .willReturn(Optional.ofNullable(post));
 
         // when
-        Post savedPost = postService.save(postRequestDto, writerId);
+        PostResponseDto actualPostResponseDto = postCreator.save(postRequestDto, writerId);
 
         // then
-        Post findPost = postRepository.findById(savedPost.getId()).get();
+        Post findPost = postRepository.findById(actualPostResponseDto.getId()).get();
         assertEquals(post.getId(), findPost.getId());
         assertEquals(post.getTitle(), findPost.getTitle());
         assertEquals(post.getContent(), findPost.getContent());
         assertEquals(post.getWriterId(), findPost.getWriterId());
+        assertEquals(expectedPostResponseDto.toString(), actualPostResponseDto.toString());
     }
 }
