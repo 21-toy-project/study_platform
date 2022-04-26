@@ -15,7 +15,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import toy.study_platform.domain.post.dto.SavePostRequestDto;
-import toy.study_platform.domain.post.dto.PostDto;
+import toy.study_platform.domain.post.dto.PostResponseDto;
 import toy.study_platform.domain.post.entity.Post;
 import toy.study_platform.domain.post.service.PostCreator;
 
@@ -56,9 +56,9 @@ public class PostRestControllerMockMvcTest {
                 .build();
         ReflectionTestUtils.setField(post, "id", postId);
 
-        PostDto postDto = PostDto.from(post);
+        PostResponseDto postResponseDto = PostResponseDto.from(post);
 
-        given(postCreator.save(any(), any())).willReturn(postDto);
+        given(postCreator.save(any(), any())).willReturn(postResponseDto);
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/posts")
