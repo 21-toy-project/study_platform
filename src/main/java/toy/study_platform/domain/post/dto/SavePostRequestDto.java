@@ -14,10 +14,12 @@ public class SavePostRequestDto {
     private String content;
 
     public static SavePostRequestDto of(String title, String content) {
-        SavePostRequestDto savePostRequestDto = new SavePostRequestDto();
-        savePostRequestDto.title = title;
-        savePostRequestDto.content = content;
-        return savePostRequestDto;
+        return new SavePostRequestDto(title, content);
+    }
+
+    private SavePostRequestDto(String title, String content) {
+        this.title = title;
+        this.content = content;
     }
 
     public Post toEntity(Long writerId) {
