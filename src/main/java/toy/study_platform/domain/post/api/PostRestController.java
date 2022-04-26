@@ -6,9 +6,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import toy.study_platform.domain.post.dto.PostRequestDto;
-import toy.study_platform.domain.post.dto.PostResponseDto;
-import toy.study_platform.domain.post.entity.Post;
+import toy.study_platform.domain.post.dto.SavePostRequestDto;
+import toy.study_platform.domain.post.dto.PostDto;
 import toy.study_platform.domain.post.service.PostCreator;
 
 @RestController
@@ -20,10 +19,10 @@ public class PostRestController {
     }
 
     @PostMapping("/api/posts")
-    public ResponseEntity<?> savePost(@Validated @RequestBody PostRequestDto dto) {
+    public ResponseEntity<?> savePost(@Validated @RequestBody SavePostRequestDto dto) {
         // reqeust header의 토큰값에서 사용자 정보 파싱한 뒤 entity에 추가
         Long writerId = 0L;
-        PostResponseDto postResponseDto = postCreator.save(dto, writerId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(postResponseDto);
+        PostDto postDto = postCreator.save(dto, writerId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(postDto);
     }
 }

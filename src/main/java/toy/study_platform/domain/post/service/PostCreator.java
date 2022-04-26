@@ -2,8 +2,8 @@ package toy.study_platform.domain.post.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import toy.study_platform.domain.post.dto.PostRequestDto;
-import toy.study_platform.domain.post.dto.PostResponseDto;
+import toy.study_platform.domain.post.dto.SavePostRequestDto;
+import toy.study_platform.domain.post.dto.PostDto;
 import toy.study_platform.domain.post.entity.Post;
 import toy.study_platform.domain.post.repository.PostRepository;
 
@@ -16,8 +16,8 @@ public class PostCreator {
         this.postRepository = postRepository;
     }
 
-    public PostResponseDto save(PostRequestDto postRequestDto, Long writerId) {
-        Post savedPost = postRepository.save(postRequestDto.toEntity(writerId));
-        return PostResponseDto.from(savedPost);
+    public PostDto save(SavePostRequestDto savePostRequestDto, Long writerId) {
+        Post savedPost = postRepository.save(savePostRequestDto.toEntity(writerId));
+        return PostDto.from(savedPost);
     }
 }

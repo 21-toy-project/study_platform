@@ -27,7 +27,7 @@ public class PostRepositoryTest {
         String content = "test-content-1";
         Long writerId = 0L;
 
-        Post post = new Post.Builder()
+        Post post = Post.builder()
                 .title(title)
                 .content(content)
                 .writerId(writerId)
