@@ -9,7 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.util.ReflectionTestUtils;
 import toy.study_platform.domain.post.dto.SavePostRequestDto;
-import toy.study_platform.domain.post.dto.PostDto;
+import toy.study_platform.domain.post.dto.PostResponseDto;
 import toy.study_platform.domain.post.entity.Post;
 import toy.study_platform.domain.post.repository.PostRepository;
 import toy.study_platform.domain.post.service.PostCreator;
@@ -41,7 +41,7 @@ public class PostServiceTest {
         Post post = savePostRequestDto.toEntity(writerId);
         // test를 위해 generated value를 임의로 지정한다
         ReflectionTestUtils.setField(post, "id", postId);
-        PostDto expectedPostDto = PostDto.from(post);
+        PostResponseDto expectedPostResponseDto = PostResponseDto.from(post);
 
         // mocking
         given(postRepository.save(any()))
@@ -50,14 +50,14 @@ public class PostServiceTest {
                 .willReturn(Optional.ofNullable(post));
 
         // when
-        PostDto actualPostDto = postCreator.save(savePostRequestDto, writerId);
+        PostResponseDto actualPostResponseDto = postCreator.save(savePostRequestDto, writerId);
 
         // then
-        Post findPost = postRepository.findById(actualPostDto.getId()).get();
+        Post findPost = postRepository.findById(actualPostResponseDto.getId()).get();
         assertEquals(post.getId(), findPost.getId());
         assertEquals(post.getTitle(), findPost.getTitle());
         assertEquals(post.getContent(), findPost.getContent());
         assertEquals(post.getWriterId(), findPost.getWriterId());
-        assertEquals(expectedPostDto.toString(), actualPostDto.toString());
+        assertEquals(expectedPostResponseDto.toString(), actualPostResponseDto.toString());
     }
 }

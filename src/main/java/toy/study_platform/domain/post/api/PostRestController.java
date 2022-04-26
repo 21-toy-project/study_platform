@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import toy.study_platform.domain.post.dto.SavePostRequestDto;
-import toy.study_platform.domain.post.dto.PostDto;
+import toy.study_platform.domain.post.dto.PostResponseDto;
 import toy.study_platform.domain.post.service.PostCreator;
 
 @RestController
@@ -22,7 +22,7 @@ public class PostRestController {
     public ResponseEntity<?> savePost(@Validated @RequestBody SavePostRequestDto dto) {
         // reqeust header의 토큰값에서 사용자 정보 파싱한 뒤 entity에 추가
         Long writerId = 0L;
-        PostDto postDto = postCreator.save(dto, writerId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(postDto);
+        PostResponseDto postResponseDto = postCreator.save(dto, writerId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(postResponseDto);
     }
 }
