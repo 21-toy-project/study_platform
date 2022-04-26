@@ -25,12 +25,16 @@ public class Post extends BaseTimeEntity {
     protected Post() {
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder {
         private String title;
         private String content;
         private Long writerId;
 
-        public Builder() {
+        private Builder() {
         }
 
         public Builder title(String title) {

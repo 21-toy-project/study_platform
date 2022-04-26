@@ -14,8 +14,8 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import toy.study_platform.domain.post.dto.PostRequestDto;
-import toy.study_platform.domain.post.dto.PostResponseDto;
+import toy.study_platform.domain.post.dto.SavePostRequestDto;
+import toy.study_platform.domain.post.dto.PostDto;
 import toy.study_platform.domain.post.entity.Post;
 import toy.study_platform.domain.post.service.PostCreator;
 
@@ -47,23 +47,23 @@ public class PostRestControllerMockMvcTest {
         String title = "test-title-1";
         String content = "test-content-1";
         Long writerId = 0L;
-        PostRequestDto postRequestDto = PostRequestDto.of(title, content);
+        SavePostRequestDto savePostRequestDto = SavePostRequestDto.of(title, content);
 
-        Post post = new Post.Builder()
+        Post post = Post.builder()
                 .title(title)
                 .content(content)
                 .writerId(writerId)
                 .build();
         ReflectionTestUtils.setField(post, "id", postId);
 
-        PostResponseDto postResponseDto = PostResponseDto.from(post);
+        PostDto postDto = PostDto.from(post);
 
-        given(postCreator.save(any(), any())).willReturn(postResponseDto);
+        given(postCreator.save(any(), any())).willReturn(postDto);
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/posts")
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper.writeValueAsString(postRequestDto))
+                    .content(objectMapper.writeValueAsString(savePostRequestDto))
                     .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                     .andExpect(status().isCreated())
