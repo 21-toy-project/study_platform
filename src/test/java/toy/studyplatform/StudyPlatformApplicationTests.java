@@ -1,4 +1,4 @@
-package toy.study_platform;
+package toy.studyplatform;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

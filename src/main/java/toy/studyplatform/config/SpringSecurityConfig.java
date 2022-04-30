@@ -1,4 +1,4 @@
-package toy.study_platform.config;
+package toy.studyplatform.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
