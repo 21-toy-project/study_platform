@@ -20,15 +20,18 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     /**
      *  Authentication
+     *  Spring Security UserDetails의 User객체를 반환
+     *  User객체는 id, pw, auth(권한)으로 생성
      */
     @Override
-    public UserDetails loadUserByUsername(String ID) throws UsernameNotFoundException {
-        UserInfo userInfo = userService.findById(ID);
+    public UserDetails loadUserByUsername(String Id) throws UsernameNotFoundException {
+        UserInfo userInfo = userService.findById(Id);
         return new User(userInfo.getId(), userInfo.getPw(), getAuthorities(userInfo));
     }
 
     /**
      *  Authorization
+     *  사용자의 권한을 UserInfo에서 받음
      * @param userInfo
      * @return
      */
