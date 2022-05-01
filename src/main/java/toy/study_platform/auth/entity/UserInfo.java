@@ -7,46 +7,46 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="USER")
+@Table(name="user")
 public class UserInfo {
 
     @Id
     @Column
     @GeneratedValue
-    private int UserNo;
+    private Long userNo;
 
     @Column(nullable = false)
     private String id;
 
     @Column(nullable = false)
-    private String Pw;
+    private String pw;
 
     @Column(nullable = false)
-    private String Name;
+    private String name;
 
     @Column(nullable = false)
-    private String Auth;
+    private String auth;
 
     @Column
     @CreationTimestamp
-    private LocalDateTime Append_Date;
+    private LocalDateTime appendDate;
 
     @Column
     @UpdateTimestamp
-    private LocalDateTime Update_Date;
+    private LocalDateTime updateDate;
 
     @Column
-    private LocalDateTime Delete_Date;
+    private LocalDateTime deleteDate;
 
     public String getId() {
         return id;
     }
 
     public String getPw() {
-        return Pw;
+        return pw;
     }
 
     public String getAuth() {
-        return Auth;
+        return auth;
     }
 }
