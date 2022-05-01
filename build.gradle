@@ -7,7 +7,6 @@ buildscript {
 plugins {
     id 'org.springframework.boot' version '2.6.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-//    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id 'java'
 }
 
@@ -44,11 +43,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     // queryDSL
-//    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
-//    annotationProcessor(
-//            "javax.persistence:javax.persistence-api",
-//            "javax.annotation:javax.annotation-api",
-//            "com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
     implementation group: 'com.querydsl', name: 'querydsl-jpa', version: queryDslVersion
     implementation group: 'com.querydsl', name: 'querydsl-apt', version: queryDslVersion
     implementation group: 'com.querydsl', name: 'querydsl-core', version: queryDslVersion
@@ -64,34 +58,5 @@ test {
 }
 
 clean {
-    delete file('src/main/generated') // 인텔리제이 Annotation processor 생성물 생성위치
+    delete file('src/main/generated')
 }
-
-// queryDSL
-//def querydslDir = "$buildDir/generated/querydsl"
-//def querydslDir = "src/main/generated"
-//querydsl {
-//    library = "com.querydsl:querydsl-apt"
-//    jpa = true
-//    querydslDefault = true
-//    querydslSourcesDir = querydslDir
-//}
-//sourceSets {
-//    main.java.srcDir querydslDir
-//}
-//compileQuerydsl{
-//    options.annotationProcessorPath = configurations.querydsl
-//}
-//compileQuerydsl.doFirst {
-//    if (file(querydslDir).exists())
-//        delete(file(querydslDir))
-//}
-//tasks.withType(JavaCompile){
-//    options.generatedSourceOutputDirectory = file(querydslDir)
-//}
-//clean.doLast {
-//    delete file(querydslDir)
-//}
-//tasks.named('test') {
-//    useJUnitPlatform()
-//}
