@@ -8,6 +8,7 @@ plugins {
     id 'org.springframework.boot' version '2.6.6'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+    id "com.diffplug.spotless" version "6.4.2"
     id 'java'
 }
 
@@ -20,6 +21,21 @@ configurations {
         extendsFrom annotationProcessor
     }
     querydsl.extendsFrom compileClasspath
+}
+
+
+spotless {
+    java {
+        targetExclude('build/**/*.java')
+        googleJavaFormat() // has its own section below
+        removeUnusedImports()
+        replaceRegex("Remove wildcard imports", "import\\s+[^\\*\\s]+\\*;(\\r\\n|\\r|\\n)", "\$1")
+        importOrder('java', 'javax', '', '\\#', 'org.junit', '\\#org.junit', 'toy.studyplatform', '\\#toy.studyplatform')
+        indentWithTabs(2)
+        indentWithSpaces(4)
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
 }
 
 repositories {
