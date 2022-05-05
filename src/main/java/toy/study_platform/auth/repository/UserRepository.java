@@ -6,5 +6,5 @@ import toy.study_platform.auth.entity.UserInfo;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserInfo, Long> {
-    UserInfo findById(String Id);
+    UserInfo findById(String id);
 }
