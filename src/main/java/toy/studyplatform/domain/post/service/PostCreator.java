@@ -1,11 +1,12 @@
-package toy.study_platform.domain.post.service;
+package toy.studyplatform.domain.post.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import toy.study_platform.domain.post.dto.SavePostRequestDto;
-import toy.study_platform.domain.post.dto.PostResponseDto;
-import toy.study_platform.domain.post.entity.Post;
-import toy.study_platform.domain.post.repository.PostRepository;
+
+import toy.studyplatform.domain.post.dto.PostResponseDto;
+import toy.studyplatform.domain.post.dto.SavePostRequestDto;
+import toy.studyplatform.domain.post.entity.Post;
+import toy.studyplatform.domain.post.repository.PostRepository;
 
 @Service
 @Transactional
