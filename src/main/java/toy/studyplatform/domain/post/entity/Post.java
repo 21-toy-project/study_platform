@@ -9,7 +9,10 @@ import toy.studyplatform.common.entity.BaseTimeEntity;
 
 @Entity
 public class Post extends BaseTimeEntity {
-    @Id @GeneratedValue private Long id;
+    @Id
+    @GeneratedValue
+    @Column(name = "post_id")
+    private Long id;
 
     @Column(length = 300, nullable = false)
     private String title;
