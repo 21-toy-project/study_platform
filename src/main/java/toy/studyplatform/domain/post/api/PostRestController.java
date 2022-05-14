@@ -1,4 +1,4 @@
-package toy.study_platform.domain.post.api;
+package toy.studyplatform.domain.post.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -6,9 +6,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import toy.study_platform.domain.post.dto.SavePostRequestDto;
-import toy.study_platform.domain.post.dto.PostResponseDto;
-import toy.study_platform.domain.post.service.PostCreator;
+
+import toy.studyplatform.domain.post.dto.PostResponseDto;
+import toy.studyplatform.domain.post.dto.SavePostRequestDto;
+import toy.studyplatform.domain.post.service.PostCreator;
 
 @RestController
 public class PostRestController {
