@@ -1,6 +1,7 @@
 package toy.studyplatform.domain.comment.dto;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import toy.studyplatform.domain.comment.entity.Comment;
 
@@ -67,5 +68,24 @@ public class CommentResDto {
 
     public LocalDateTime getModifiedDate() {
         return modifiedDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CommentResDto that = (CommentResDto) o;
+        return anonymous == that.anonymous
+                && Objects.equals(id, that.id)
+                && Objects.equals(content, that.content)
+                && Objects.equals(writerId, that.writerId)
+                && Objects.equals(postId, that.postId)
+                && Objects.equals(createdDate, that.createdDate)
+                && Objects.equals(modifiedDate, that.modifiedDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, content, writerId, anonymous, postId, createdDate, modifiedDate);
     }
 }
