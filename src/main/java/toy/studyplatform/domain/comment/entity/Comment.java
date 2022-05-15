@@ -55,6 +55,11 @@ public class Comment extends BaseTimeEntity {
         }
 
         public Builder anonymous(boolean anonymous) {
+            // 글 작성자가 답글을 달 경우, 무조건 익명 안되는 걸로
+            if (post.getWriterId().equals(writerId)) {
+                this.anonymous = false;
+                return this;
+            }
             this.anonymous = anonymous;
             return this;
         }
