@@ -11,13 +11,15 @@ import toy.studyplatform.domain.post.entity.Post;
 public class SaveCommentRequestDto {
     @JsonProperty @NotBlank private String content;
 
-    @JsonProperty @NotBlank private Long postId;
+    @JsonProperty @NotNull private Long postId;
 
     @JsonProperty @NotNull private boolean anonymous;
 
     public static SaveCommentRequestDto of(String content, Long postId, boolean anonymous) {
         return new SaveCommentRequestDto(content, postId, anonymous);
     }
+
+    private SaveCommentRequestDto() {}
 
     private SaveCommentRequestDto(String content, Long postId, boolean anonymous) {
         this.content = content;
