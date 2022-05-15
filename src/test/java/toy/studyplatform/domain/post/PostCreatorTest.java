@@ -25,7 +25,7 @@ import toy.studyplatform.domain.post.service.PostCreator;
 
 @ExtendWith(MockitoExtension.class)
 @TestPropertySource("classpath:application-test.properties")
-public class PostServiceTest {
+public class PostCreatorTest {
     @Mock private PostRepository postRepository;
 
     @InjectMocks private PostCreator postCreator;

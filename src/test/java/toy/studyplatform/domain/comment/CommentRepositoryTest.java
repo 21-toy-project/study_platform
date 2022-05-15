@@ -6,6 +6,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,15 +26,20 @@ public class CommentRepositoryTest {
 
     @Autowired private PostRepository postRepository;
 
-    @Test
-    @DisplayName("comment 저장 성공 테스트")
-    public void comment_저장_성공() {
+    private Post post;
+
+    @BeforeEach
+    public void init() {
         String postTitle = "post-test-title-1";
         String postContent = "post-test-content-1";
         Long postWriterId = 0L;
-        Post post = Post.builder().title(postTitle).content(postContent).writerId(postWriterId).build();
+        post = Post.builder().title(postTitle).content(postContent).writerId(postWriterId).build();
         postRepository.save(post);
+    }
 
+    @Test
+    @DisplayName("comment 저장 성공 테스트")
+    public void comment_저장_성공() {
         // Post 작성자와 comment 작성자가 다를 경우
         String commentContent = "comment 저장 성공 테스트 내용";
         Long commentWriterId = 1L;

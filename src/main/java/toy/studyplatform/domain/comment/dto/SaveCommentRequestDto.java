@@ -15,6 +15,10 @@ public class SaveCommentRequestDto {
 
     @JsonProperty @NotNull private boolean anonymous;
 
+    public static SaveCommentRequestDto of(String content, Long postId, boolean anonymous) {
+        return new SaveCommentRequestDto(content, postId, anonymous);
+    }
+
     private SaveCommentRequestDto(String content, Long postId, boolean anonymous) {
         this.content = content;
         this.postId = postId;
@@ -23,9 +27,9 @@ public class SaveCommentRequestDto {
 
     public Comment toEntity(Long writerId, Post post) {
         return Comment.builder()
+                .post(post)
                 .anonymous(anonymous)
                 .content(content)
-                .post(post)
                 .writerId(writerId)
                 .build();
     }
