@@ -1,9 +1,6 @@
-package toy.study_platform.domain.post;
+package toy.studyplatform.domain.post;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,28 +11,30 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import toy.study_platform.domain.post.dto.SavePostRequestDto;
-import toy.study_platform.domain.post.dto.PostResponseDto;
-import toy.study_platform.domain.post.entity.Post;
-import toy.study_platform.domain.post.service.PostCreator;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import toy.studyplatform.domain.post.dto.PostResponseDto;
+import toy.studyplatform.domain.post.dto.SavePostRequestDto;
+import toy.studyplatform.domain.post.entity.Post;
+import toy.studyplatform.domain.post.service.PostCreator;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
 @TestPropertySource("classpath:application-test.properties")
 public class PostRestControllerMockMvcTest {
-    @Autowired
-    private MockMvc mockMvc;
+    @Autowired private MockMvc mockMvc;
 
-    @MockBean
-    private PostCreator postCreator;
+    @MockBean private PostCreator postCreator;
 
     ObjectMapper objectMapper = new ObjectMapper();
 
@@ -49,26 +48,22 @@ public class PostRestControllerMockMvcTest {
         Long writerId = 0L;
         SavePostRequestDto savePostRequestDto = SavePostRequestDto.of(title, content);
 
-        Post post = Post.builder()
-                .title(title)
-                .content(content)
-                .writerId(writerId)
-                .build();
+        Post post = Post.builder().title(title).content(content).writerId(writerId).build();
         ReflectionTestUtils.setField(post, "id", postId);
 
         PostResponseDto postResponseDto = PostResponseDto.from(post);
 
         given(postCreator.save(any(), any())).willReturn(postResponseDto);
 
-        mockMvc.perform(MockMvcRequestBuilders
-                .post("/api/posts")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper.writeValueAsString(savePostRequestDto))
-                    .accept(MediaType.APPLICATION_JSON))
+        mockMvc
+                .perform(
+                        MockMvcRequestBuilders.post("/api/posts")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(savePostRequestDto))
+                                .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
-                    .andExpect(status().isCreated())
-                    .andExpect(jsonPath("$.id").value(post.getId()))
-                    .andExpect(jsonPath("$.title").value(post.getTitle()));
-
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").value(post.getId()))
+                .andExpect(jsonPath("$.title").value(post.getTitle()));
     }
 }

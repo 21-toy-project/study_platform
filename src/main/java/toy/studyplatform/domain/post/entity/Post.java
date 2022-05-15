@@ -1,20 +1,17 @@
-package toy.study_platform.domain.post.entity;
-
-
-import toy.study_platform.common.entity.BaseTimeEntity;
+package toy.studyplatform.domain.post.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import toy.studyplatform.common.entity.BaseTimeEntity;
+
 @Entity
 public class Post extends BaseTimeEntity {
-    @Id
-    @GeneratedValue
-    private Long id;
+    @Id @GeneratedValue private Long id;
 
-    @Column(length=300, nullable=false)
+    @Column(length = 300, nullable = false)
     private String title;
 
     @Column(columnDefinition = "TEXT", nullable = false)
@@ -22,8 +19,7 @@ public class Post extends BaseTimeEntity {
 
     private Long writerId;
 
-    protected Post() {
-    }
+    protected Post() {}
 
     public static Builder builder() {
         return new Builder();
@@ -34,8 +30,7 @@ public class Post extends BaseTimeEntity {
         private String content;
         private Long writerId;
 
-        private Builder() {
-        }
+        private Builder() {}
 
         public Builder title(String title) {
             this.title = title;

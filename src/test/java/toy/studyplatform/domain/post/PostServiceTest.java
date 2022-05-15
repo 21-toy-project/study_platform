@@ -1,33 +1,34 @@
-package toy.study_platform.domain.post;
+package toy.studyplatform.domain.post;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import java.util.Optional;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.util.ReflectionTestUtils;
-import toy.study_platform.domain.post.dto.SavePostRequestDto;
-import toy.study_platform.domain.post.dto.PostResponseDto;
-import toy.study_platform.domain.post.entity.Post;
-import toy.study_platform.domain.post.repository.PostRepository;
-import toy.study_platform.domain.post.service.PostCreator;
 
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import toy.studyplatform.domain.post.dto.PostResponseDto;
+import toy.studyplatform.domain.post.dto.SavePostRequestDto;
+import toy.studyplatform.domain.post.entity.Post;
+import toy.studyplatform.domain.post.repository.PostRepository;
+import toy.studyplatform.domain.post.service.PostCreator;
 
 @ExtendWith(MockitoExtension.class)
 @TestPropertySource("classpath:application-test.properties")
 public class PostServiceTest {
-    @Mock
-    private PostRepository postRepository;
+    @Mock private PostRepository postRepository;
 
-    @InjectMocks
-    private PostCreator postCreator;
+    @InjectMocks private PostCreator postCreator;
 
     @Test
     @DisplayName("새 post 저장 서비스 성공 테스트")
@@ -44,10 +45,8 @@ public class PostServiceTest {
         PostResponseDto expectedPostResponseDto = PostResponseDto.from(post);
 
         // mocking
-        given(postRepository.save(any()))
-                .willReturn(post);
-        given(postRepository.findById(postId))
-                .willReturn(Optional.ofNullable(post));
+        given(postRepository.save(any())).willReturn(post);
+        given(postRepository.findById(postId)).willReturn(Optional.ofNullable(post));
 
         // when
         PostResponseDto actualPostResponseDto = postCreator.save(savePostRequestDto, writerId);

@@ -1,8 +1,8 @@
-package toy.study_platform.domain.post.dto;
-
-import toy.study_platform.domain.post.entity.Post;
+package toy.studyplatform.domain.post.dto;
 
 import java.time.LocalDateTime;
+
+import toy.studyplatform.domain.post.entity.Post;
 
 public class PostResponseDto {
     private Long id;
@@ -12,7 +12,13 @@ public class PostResponseDto {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-    public PostResponseDto(Long id, String title, String content, Long writerId, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public PostResponseDto(
+            Long id,
+            String title,
+            String content,
+            Long writerId,
+            LocalDateTime createdDate,
+            LocalDateTime modifiedDate) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -57,13 +63,21 @@ public class PostResponseDto {
 
     @Override
     public String toString() {
-        return "PostResponseDto{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", writerId=" + writerId +
-                ", createdDate=" + createdDate +
-                ", modifiedDate=" + modifiedDate +
-                '}';
+        return "PostResponseDto{"
+                + "id="
+                + id
+                + ", title='"
+                + title
+                + '\''
+                + ", content='"
+                + content
+                + '\''
+                + ", writerId="
+                + writerId
+                + ", createdDate="
+                + createdDate
+                + ", modifiedDate="
+                + modifiedDate
+                + '}';
     }
 }
