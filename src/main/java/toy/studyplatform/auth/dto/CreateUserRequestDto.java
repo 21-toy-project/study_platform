@@ -6,13 +6,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import toy.studyplatform.auth.entity.UserInfo;
 
-public class UserRequestDto {
+public class CreateUserRequestDto {
     @JsonProperty @NotBlank private String id;
     @JsonProperty @NotBlank private String pw;
     @JsonProperty @NotBlank private String name;
     @JsonProperty @NotBlank private String auth;
 
-    private UserRequestDto(String id, String pw, String name, String auth) {
+    private CreateUserRequestDto(String id, String pw, String name, String auth) {
         this.id = id;
         this.pw = pw;
         this.name = name;
