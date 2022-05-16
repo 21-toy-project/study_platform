@@ -1,17 +1,18 @@
 package toy.studyplatform.auth.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import toy.studyplatform.common.entity.BaseTimeEntity;
 
-import javax.persistence.*;
-
 @Entity
-@Table(name="USER")
+@Table(name = "USER")
 public class UserInfo extends BaseTimeEntity {
 
-    @Id
-    @Column
-    @GeneratedValue
-    private Long userNo;
+    @Id @Column @GeneratedValue private Long userNo;
 
     @Column(nullable = false)
     private String id;
@@ -25,7 +26,7 @@ public class UserInfo extends BaseTimeEntity {
     @Column(nullable = false)
     private String auth;
 
-    public static Builder builder(){
+    public static Builder builder() {
         return new Builder();
     }
 
@@ -35,32 +36,31 @@ public class UserInfo extends BaseTimeEntity {
         private String name;
         private String auth;
 
-        private Builder(){
-        }
+        private Builder() {}
 
-        public Builder id(String id){
+        public Builder id(String id) {
             this.id = id;
             return this;
         }
 
-        public Builder pw(String pw){
+        public Builder pw(String pw) {
             this.pw = pw;
             return this;
         }
 
-        public Builder name(String name){
+        public Builder name(String name) {
             this.name = name;
             return this;
         }
 
-        public Builder auth(String auth){
+        public Builder auth(String auth) {
             this.auth = auth;
             return this;
         }
 
-        public UserInfo build(){
+        public UserInfo build() {
             UserInfo userInfo = new UserInfo();
-            if(id.isEmpty() || pw.isEmpty() || name.isEmpty() || auth.isEmpty()){
+            if (id.isEmpty() || pw.isEmpty() || name.isEmpty() || auth.isEmpty()) {
                 return null;
             }
             userInfo.id = id;
@@ -70,7 +70,6 @@ public class UserInfo extends BaseTimeEntity {
             return userInfo;
         }
     }
-
 
     public String getId() {
         return id;
