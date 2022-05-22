@@ -21,7 +21,7 @@ public class Comment extends BaseTimeEntity {
 
     private Long writerId;
 
-    private boolean anonymous;
+    private boolean isAnonymous;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
@@ -39,7 +39,7 @@ public class Comment extends BaseTimeEntity {
     public static class Builder {
         private String content;
         private Long writerId;
-        private boolean anonymous;
+        private boolean isAnonymous;
         private Post post;
 
         private Builder() {}
@@ -57,10 +57,10 @@ public class Comment extends BaseTimeEntity {
         public Builder anonymous(boolean anonymous) {
             // 글 작성자가 답글을 달 경우, 무조건 익명 안되는 걸로
             if (post.getWriterId().equals(writerId)) {
-                this.anonymous = false;
+                this.isAnonymous = false;
                 return this;
             }
-            this.anonymous = anonymous;
+            this.isAnonymous = anonymous;
             return this;
         }
 
@@ -76,7 +76,7 @@ public class Comment extends BaseTimeEntity {
             }
             comment.content = content;
             comment.writerId = writerId;
-            comment.anonymous = anonymous;
+            comment.isAnonymous = isAnonymous;
             comment.post = post;
             return comment;
         }
@@ -95,7 +95,7 @@ public class Comment extends BaseTimeEntity {
     }
 
     public boolean isAnonymous() {
-        return anonymous;
+        return isAnonymous;
     }
 
     public Post getPost() {
