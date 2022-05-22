@@ -9,7 +9,7 @@ public class CommentResDto {
     private Long id;
     private String content;
     private Long writerId;
-    private boolean anonymous;
+    private boolean isAnonymous;
     private Long postId;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
@@ -18,14 +18,14 @@ public class CommentResDto {
             Long id,
             String content,
             Long writerId,
-            boolean anonymous,
+            boolean isAnonymous,
             Long postId,
             LocalDateTime createdDate,
             LocalDateTime modifiedDate) {
         this.id = id;
         this.content = content;
         this.writerId = writerId;
-        this.anonymous = anonymous;
+        this.isAnonymous = isAnonymous;
         this.postId = postId;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
@@ -35,11 +35,11 @@ public class CommentResDto {
         final Long id = comment.getId();
         final String content = comment.getContent();
         final Long writerId = comment.getWriterId();
-        final boolean anonymous = comment.isAnonymous();
+        final boolean isAnonymous = comment.isAnonymous();
         final Long postId = comment.getPost().getId();
         final LocalDateTime createdDate = comment.getCreatedDate();
         final LocalDateTime modifiedDate = comment.getModifiedDate();
-        return new CommentResDto(id, content, writerId, anonymous, postId, createdDate, modifiedDate);
+        return new CommentResDto(id, content, writerId, isAnonymous, postId, createdDate, modifiedDate);
     }
 
     public Long getId() {
@@ -55,7 +55,7 @@ public class CommentResDto {
     }
 
     public boolean isAnonymous() {
-        return anonymous;
+        return isAnonymous;
     }
 
     public Long getPostId() {
@@ -75,7 +75,7 @@ public class CommentResDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CommentResDto that = (CommentResDto) o;
-        return anonymous == that.anonymous
+        return isAnonymous == that.isAnonymous
                 && Objects.equals(id, that.id)
                 && Objects.equals(content, that.content)
                 && Objects.equals(writerId, that.writerId)
@@ -86,6 +86,6 @@ public class CommentResDto {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, content, writerId, anonymous, postId, createdDate, modifiedDate);
+        return Objects.hash(id, content, writerId, isAnonymous, postId, createdDate, modifiedDate);
     }
 }

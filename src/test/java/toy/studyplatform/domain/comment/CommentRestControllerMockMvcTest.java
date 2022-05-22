@@ -27,7 +27,6 @@ import toy.studyplatform.domain.comment.dto.SaveCommentRequestDto;
 import toy.studyplatform.domain.comment.entity.Comment;
 import toy.studyplatform.domain.comment.service.CommentCreator;
 import toy.studyplatform.domain.post.entity.Post;
-import toy.studyplatform.domain.post.service.PostCreator;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -35,7 +34,6 @@ import toy.studyplatform.domain.post.service.PostCreator;
 @TestPropertySource("classpath:application-test.properties")
 public class CommentRestControllerMockMvcTest {
     @Autowired private MockMvc mockMvc;
-    @MockBean private PostCreator postCreator;
     @MockBean private CommentCreator commentCreator;
 
     ObjectMapper objectMapper = new ObjectMapper();
@@ -55,9 +53,9 @@ public class CommentRestControllerMockMvcTest {
         Long commentId = 0L;
         String commentContent = "comment 저장 성공 테스트 내용";
         Long commentWriterId = 1L;
-        boolean anonymous = true;
+        boolean isAnonymous = true;
         SaveCommentRequestDto saveCommentRequestDto =
-                SaveCommentRequestDto.of(commentContent, postId, anonymous);
+                SaveCommentRequestDto.of(commentContent, postId, isAnonymous);
 
         Comment comment = saveCommentRequestDto.toEntity(commentWriterId, post);
         ReflectionTestUtils.setField(comment, "id", commentId);

@@ -13,24 +13,24 @@ public class SaveCommentRequestDto {
 
     @JsonProperty @NotNull private Long postId;
 
-    @JsonProperty @NotNull private boolean anonymous;
+    @JsonProperty @NotNull private boolean isAnonymous;
 
-    public static SaveCommentRequestDto of(String content, Long postId, boolean anonymous) {
-        return new SaveCommentRequestDto(content, postId, anonymous);
+    public static SaveCommentRequestDto of(String content, Long postId, boolean isAnonymous) {
+        return new SaveCommentRequestDto(content, postId, isAnonymous);
     }
 
     private SaveCommentRequestDto() {}
 
-    private SaveCommentRequestDto(String content, Long postId, boolean anonymous) {
+    private SaveCommentRequestDto(String content, Long postId, boolean isAnonymous) {
         this.content = content;
         this.postId = postId;
-        this.anonymous = anonymous;
+        this.isAnonymous = isAnonymous;
     }
 
     public Comment toEntity(Long writerId, Post post) {
         return Comment.builder()
                 .post(post)
-                .anonymous(anonymous)
+                .isAnonymous(isAnonymous)
                 .content(content)
                 .writerId(writerId)
                 .build();

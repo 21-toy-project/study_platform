@@ -51,9 +51,9 @@ public class CommentCreatorTest {
         Long commentId = 0L;
         String commentContent = "comment 저장 성공 테스트 내용";
         Long commentWriterId = 1L;
-        boolean anonymous = true;
+        boolean isAnonymous = true;
         SaveCommentRequestDto saveCommentRequestDto =
-                SaveCommentRequestDto.of(commentContent, postId, anonymous);
+                SaveCommentRequestDto.of(commentContent, postId, isAnonymous);
         Comment comment = saveCommentRequestDto.toEntity(commentWriterId, post);
         ReflectionTestUtils.setField(comment, "id", commentId);
         CommentResDto expectedCommentResDto = CommentResDto.from(comment);
