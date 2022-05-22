@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 import toy.studyplatform.common.entity.BaseTimeEntity;
 
@@ -14,10 +15,12 @@ public class Post extends BaseTimeEntity {
     @Column(name = "post_id")
     private Long id;
 
-    @Column(length = 300, nullable = false)
+    @NotNull
+    @Column(length = 300)
     private String title;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @NotNull
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     private Long writerId;
