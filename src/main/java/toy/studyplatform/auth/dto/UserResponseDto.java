@@ -9,16 +9,16 @@ public class UserResponseDto {
     private String id;
     private String pw;
     private String name;
-    private String auth;
+    private String role;
     private LocalDateTime createdDate;
 
     public UserResponseDto(
-            Long userNo, String id, String pw, String name, String auth, LocalDateTime createdDate) {
+            Long userNo, String id, String pw, String name, String role, LocalDateTime createdDate) {
         this.userNo = userNo;
         this.id = id;
         this.pw = pw;
         this.name = name;
-        this.auth = auth;
+        this.role = role;
         this.createdDate = createdDate;
     }
 
@@ -27,9 +27,9 @@ public class UserResponseDto {
         final String id = userInfo.getId();
         final String pw = userInfo.getPw();
         final String name = userInfo.getName();
-        final String auth = userInfo.getAuth();
+        final String role = userInfo.getRole();
         final LocalDateTime createdDate = userInfo.getCreatedDate();
-        return new UserResponseDto(userNo, id, pw, name, auth, createdDate);
+        return new UserResponseDto(userNo, id, pw, name, role, createdDate);
     }
 
     @Override
@@ -46,8 +46,8 @@ public class UserResponseDto {
                 + ", name='"
                 + name
                 + '\''
-                + ", auth='"
-                + auth
+                + ", role='"
+                + role
                 + '\''
                 + ", createDate="
                 + createdDate
