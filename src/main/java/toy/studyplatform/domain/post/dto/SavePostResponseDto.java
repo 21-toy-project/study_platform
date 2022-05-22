@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import toy.studyplatform.domain.post.entity.Post;
 
-public class PostResponseDto {
+public class SavePostResponseDto {
     private Long id;
     private String title;
     private String content;
@@ -12,7 +12,7 @@ public class PostResponseDto {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-    public PostResponseDto(
+    public SavePostResponseDto(
             Long id,
             String title,
             String content,
@@ -27,14 +27,14 @@ public class PostResponseDto {
         this.modifiedDate = modifiedDate;
     }
 
-    public static PostResponseDto from(Post post) {
+    public static SavePostResponseDto from(Post post) {
         final Long id = post.getId();
         final String title = post.getTitle();
         final String content = post.getContent();
         final Long writerId = post.getWriterId();
         final LocalDateTime createdDate = post.getCreatedDate();
         final LocalDateTime modifiedDate = post.getModifiedDate();
-        return new PostResponseDto(id, title, content, writerId, createdDate, modifiedDate);
+        return new SavePostResponseDto(id, title, content, writerId, createdDate, modifiedDate);
     }
 
     public Long getId() {

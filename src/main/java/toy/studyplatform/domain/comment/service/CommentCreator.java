@@ -3,8 +3,8 @@ package toy.studyplatform.domain.comment.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import toy.studyplatform.domain.comment.dto.CommentResponseDto;
 import toy.studyplatform.domain.comment.dto.SaveCommentRequestDto;
+import toy.studyplatform.domain.comment.dto.SaveCommentResponseDto;
 import toy.studyplatform.domain.comment.entity.Comment;
 import toy.studyplatform.domain.comment.repository.CommentRepository;
 import toy.studyplatform.domain.post.entity.Post;
@@ -21,9 +21,9 @@ public class CommentCreator {
         this.postRepository = postRepository;
     }
 
-    public CommentResponseDto save(SaveCommentRequestDto saveCommentRequestDto, Long writerId) {
+    public SaveCommentResponseDto save(SaveCommentRequestDto saveCommentRequestDto, Long writerId) {
         Post post = postRepository.getById(saveCommentRequestDto.getPostId());
         Comment savedComment = commentRepository.save(saveCommentRequestDto.toEntity(writerId, post));
-        return CommentResponseDto.from(savedComment);
+        return SaveCommentResponseDto.from(savedComment);
     }
 }

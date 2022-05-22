@@ -22,8 +22,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import toy.studyplatform.domain.post.dto.PostResponseDto;
 import toy.studyplatform.domain.post.dto.SavePostRequestDto;
+import toy.studyplatform.domain.post.dto.SavePostResponseDto;
 import toy.studyplatform.domain.post.entity.Post;
 import toy.studyplatform.domain.post.service.PostCreator;
 
@@ -51,9 +51,9 @@ public class PostRestControllerMockMvcTest {
         Post post = Post.builder().title(title).content(content).writerId(writerId).build();
         ReflectionTestUtils.setField(post, "id", postId);
 
-        PostResponseDto postResponseDto = PostResponseDto.from(post);
+        SavePostResponseDto savePostResponseDto = SavePostResponseDto.from(post);
 
-        given(postCreator.save(any(), any())).willReturn(postResponseDto);
+        given(postCreator.save(any(), any())).willReturn(savePostResponseDto);
 
         mockMvc
                 .perform(
