@@ -10,17 +10,17 @@ public class CreateUserRequestDto {
     @JsonProperty @NotBlank private String id;
     @JsonProperty @NotBlank private String pw;
     @JsonProperty @NotBlank private String name;
-    @JsonProperty @NotBlank private String auth;
+    @JsonProperty @NotBlank private String role;
 
-    private CreateUserRequestDto(String id, String pw, String name, String auth) {
+    private CreateUserRequestDto(String id, String pw, String name, String role) {
         this.id = id;
         this.pw = pw;
         this.name = name;
-        this.auth = auth;
+        this.role = role;
     }
 
     public UserInfo toEntity() {
-        UserInfo userInfo = UserInfo.builder().id(id).pw(pw).name(name).auth(auth).build();
+        UserInfo userInfo = UserInfo.builder().id(id).pw(pw).name(name).role(role).build();
         return userInfo;
     }
 }
