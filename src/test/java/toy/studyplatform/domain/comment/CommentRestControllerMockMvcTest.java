@@ -22,7 +22,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import toy.studyplatform.domain.comment.dto.CommentResDto;
+import toy.studyplatform.domain.comment.dto.CommentResponseDto;
 import toy.studyplatform.domain.comment.dto.SaveCommentRequestDto;
 import toy.studyplatform.domain.comment.entity.Comment;
 import toy.studyplatform.domain.comment.service.CommentCreator;
@@ -60,9 +60,9 @@ public class CommentRestControllerMockMvcTest {
         Comment comment = saveCommentRequestDto.toEntity(commentWriterId, post);
         ReflectionTestUtils.setField(comment, "id", commentId);
 
-        CommentResDto commentResDto = CommentResDto.from(comment);
+        CommentResponseDto commentResponseDto = CommentResponseDto.from(comment);
 
-        given(commentCreator.save(any(), any())).willReturn(commentResDto);
+        given(commentCreator.save(any(), any())).willReturn(commentResponseDto);
 
         mockMvc
                 .perform(

@@ -17,7 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import toy.studyplatform.domain.comment.dto.CommentResDto;
+import toy.studyplatform.domain.comment.dto.CommentResponseDto;
 import toy.studyplatform.domain.comment.dto.SaveCommentRequestDto;
 import toy.studyplatform.domain.comment.entity.Comment;
 import toy.studyplatform.domain.comment.repository.CommentRepository;
@@ -56,21 +56,22 @@ public class CommentCreatorTest {
                 SaveCommentRequestDto.of(commentContent, postId, isAnonymous);
         Comment comment = saveCommentRequestDto.toEntity(commentWriterId, post);
         ReflectionTestUtils.setField(comment, "id", commentId);
-        CommentResDto expectedCommentResDto = CommentResDto.from(comment);
+        CommentResponseDto expectedCommentResponseDto = CommentResponseDto.from(comment);
 
         // mocking - comment
         given(commentRepository.save(any())).willReturn(comment);
         given(commentRepository.findById(commentId)).willReturn(Optional.ofNullable(comment));
 
         // when
-        CommentResDto actualCommentResDto = commentCreator.save(saveCommentRequestDto, commentWriterId);
+        CommentResponseDto actualCommentResponseDto =
+                commentCreator.save(saveCommentRequestDto, commentWriterId);
 
         // then
-        Comment findComment = commentRepository.findById(actualCommentResDto.getId()).get();
+        Comment findComment = commentRepository.findById(actualCommentResponseDto.getId()).get();
         assertEquals(comment.getWriterId(), findComment.getWriterId());
         assertEquals(comment.getContent(), findComment.getContent());
         assertEquals(comment.isAnonymous(), findComment.isAnonymous());
         assertEquals(comment.getPost(), findComment.getPost());
-        assertEquals(expectedCommentResDto, actualCommentResDto);
+        assertEquals(expectedCommentResponseDto, actualCommentResponseDto);
     }
 }
