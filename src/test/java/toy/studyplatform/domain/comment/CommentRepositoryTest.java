@@ -40,7 +40,6 @@ public class CommentRepositoryTest {
     @Test
     @DisplayName("comment 저장 성공 테스트")
     public void comment_저장_성공() {
-        // Post 작성자와 comment 작성자가 다를 경우
         String commentContent = "comment 저장 성공 테스트 내용";
         Long commentWriterId = 1L;
         boolean isAnonymous = true;
@@ -58,25 +57,6 @@ public class CommentRepositoryTest {
         assertEquals(savedComment.getPost(), post);
         assertEquals(savedComment.isAnonymous(), isAnonymous);
         assertEquals(savedComment.getWriterId(), commentWriterId);
-
-        // post 작성자와 comment 작성자가 같을 경우
-        String commentContent2 = "comment 저장 성공 테스트 내용 2";
-        Long commentWriterId2 = 0L;
-        boolean isAnonymous2 = true;
-        Comment comment2 =
-                Comment.builder()
-                        .writerId(commentWriterId2)
-                        .post(post)
-                        .isAnonymous(isAnonymous2)
-                        .content(commentContent2)
-                        .build();
-
-        Comment savedComment2 = commentRepository.save(comment2);
-
-        assertEquals(savedComment2.getContent(), commentContent2);
-        assertEquals(savedComment2.getPost(), post);
-        assertEquals(savedComment2.isAnonymous(), false);
-        assertEquals(savedComment2.getWriterId(), commentWriterId2);
     }
 
     @AfterEach
