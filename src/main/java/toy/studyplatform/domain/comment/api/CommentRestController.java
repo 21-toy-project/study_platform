@@ -13,7 +13,7 @@ import toy.studyplatform.domain.comment.service.CommentCreator;
 
 @RestController
 public class CommentRestController {
-    private CommentCreator commentCreator;
+    private final CommentCreator commentCreator;
 
     public CommentRestController(CommentCreator commentCreator) {
         this.commentCreator = commentCreator;
