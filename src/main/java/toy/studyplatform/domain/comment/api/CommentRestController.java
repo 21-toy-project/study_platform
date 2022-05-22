@@ -20,7 +20,7 @@ public class CommentRestController {
     }
 
     @PostMapping("/api/comments")
-    public ResponseEntity<?> saveComment(
+    public ResponseEntity<CommentResDto> saveComment(
             @Validated @RequestBody SaveCommentRequestDto commentRequestDto) {
         // TODO: 2022-05-15 reqeust header의 토큰값에서 사용자 정보 파싱한 뒤 entity에 추가
         Long writerId = 0L;
