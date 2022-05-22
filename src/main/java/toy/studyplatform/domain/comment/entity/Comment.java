@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import toy.studyplatform.common.entity.BaseTimeEntity;
 import toy.studyplatform.domain.post.entity.Post;
@@ -16,18 +17,17 @@ import toy.studyplatform.domain.post.entity.Post;
 public class Comment extends BaseTimeEntity {
     @Id @GeneratedValue private Long id;
 
-    @Column(length = 500, nullable = false)
+    @NotNull
+    @Column(length = 500)
     private String content;
 
     private Long writerId;
 
     private boolean isAnonymous;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(
-            name = "post_id",
-            nullable = false,
-            foreignKey = @ForeignKey(name = "FK_COMMENT_POST_ID"))
+    @JoinColumn(name = "post_id", foreignKey = @ForeignKey(name = "FK_COMMENT_POST_ID"))
     private Post post;
 
     protected Comment() {}
