@@ -17,8 +17,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import toy.studyplatform.domain.comment.dto.CommentResponseDto;
 import toy.studyplatform.domain.comment.dto.SaveCommentRequestDto;
+import toy.studyplatform.domain.comment.dto.SaveCommentResponseDto;
 import toy.studyplatform.domain.comment.entity.Comment;
 import toy.studyplatform.domain.comment.repository.CommentRepository;
 import toy.studyplatform.domain.comment.service.CommentCreator;
@@ -56,22 +56,22 @@ public class CommentCreatorTest {
                 SaveCommentRequestDto.of(commentContent, postId, isAnonymous);
         Comment comment = saveCommentRequestDto.toEntity(commentWriterId, post);
         ReflectionTestUtils.setField(comment, "id", commentId);
-        CommentResponseDto expectedCommentResponseDto = CommentResponseDto.from(comment);
+        SaveCommentResponseDto expectedSaveCommentResponseDto = SaveCommentResponseDto.from(comment);
 
         // mocking - comment
         given(commentRepository.save(any())).willReturn(comment);
         given(commentRepository.findById(commentId)).willReturn(Optional.ofNullable(comment));
 
         // when
-        CommentResponseDto actualCommentResponseDto =
+        SaveCommentResponseDto actualSaveCommentResponseDto =
                 commentCreator.save(saveCommentRequestDto, commentWriterId);
 
         // then
-        Comment findComment = commentRepository.findById(actualCommentResponseDto.getId()).get();
+        Comment findComment = commentRepository.findById(actualSaveCommentResponseDto.getId()).get();
         assertEquals(comment.getWriterId(), findComment.getWriterId());
         assertEquals(comment.getContent(), findComment.getContent());
         assertEquals(comment.isAnonymous(), findComment.isAnonymous());
         assertEquals(comment.getPost(), findComment.getPost());
-        assertEquals(expectedCommentResponseDto, actualCommentResponseDto);
+        assertEquals(expectedSaveCommentResponseDto, actualSaveCommentResponseDto);
     }
 }

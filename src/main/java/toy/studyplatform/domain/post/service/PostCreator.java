@@ -3,8 +3,8 @@ package toy.studyplatform.domain.post.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import toy.studyplatform.domain.post.dto.PostResponseDto;
 import toy.studyplatform.domain.post.dto.SavePostRequestDto;
+import toy.studyplatform.domain.post.dto.SavePostResponseDto;
 import toy.studyplatform.domain.post.entity.Post;
 import toy.studyplatform.domain.post.repository.PostRepository;
 
@@ -17,8 +17,8 @@ public class PostCreator {
         this.postRepository = postRepository;
     }
 
-    public PostResponseDto save(SavePostRequestDto savePostRequestDto, Long writerId) {
+    public SavePostResponseDto save(SavePostRequestDto savePostRequestDto, Long writerId) {
         Post savedPost = postRepository.save(savePostRequestDto.toEntity(writerId));
-        return PostResponseDto.from(savedPost);
+        return SavePostResponseDto.from(savedPost);
     }
 }

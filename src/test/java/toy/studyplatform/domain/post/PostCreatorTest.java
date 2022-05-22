@@ -17,8 +17,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import toy.studyplatform.domain.post.dto.PostResponseDto;
 import toy.studyplatform.domain.post.dto.SavePostRequestDto;
+import toy.studyplatform.domain.post.dto.SavePostResponseDto;
 import toy.studyplatform.domain.post.entity.Post;
 import toy.studyplatform.domain.post.repository.PostRepository;
 import toy.studyplatform.domain.post.service.PostCreator;
@@ -42,21 +42,21 @@ public class PostCreatorTest {
         Post post = savePostRequestDto.toEntity(writerId);
         // test를 위해 generated value를 임의로 지정한다
         ReflectionTestUtils.setField(post, "id", postId);
-        PostResponseDto expectedPostResponseDto = PostResponseDto.from(post);
+        SavePostResponseDto expectedSavePostResponseDto = SavePostResponseDto.from(post);
 
         // mocking
         given(postRepository.save(any())).willReturn(post);
         given(postRepository.findById(postId)).willReturn(Optional.ofNullable(post));
 
         // when
-        PostResponseDto actualPostResponseDto = postCreator.save(savePostRequestDto, writerId);
+        SavePostResponseDto actualSavePostResponseDto = postCreator.save(savePostRequestDto, writerId);
 
         // then
-        Post findPost = postRepository.findById(actualPostResponseDto.getId()).get();
+        Post findPost = postRepository.findById(actualSavePostResponseDto.getId()).get();
         assertEquals(post.getId(), findPost.getId());
         assertEquals(post.getTitle(), findPost.getTitle());
         assertEquals(post.getContent(), findPost.getContent());
         assertEquals(post.getWriterId(), findPost.getWriterId());
-        assertEquals(expectedPostResponseDto.toString(), actualPostResponseDto.toString());
+        assertEquals(expectedSavePostResponseDto.toString(), actualSavePostResponseDto.toString());
     }
 }

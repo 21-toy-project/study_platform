@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import toy.studyplatform.domain.comment.entity.Comment;
 
-public class CommentResponseDto {
+public class SaveCommentResponseDto {
     private Long id;
     private String content;
     private Long writerId;
@@ -14,7 +14,7 @@ public class CommentResponseDto {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-    public CommentResponseDto(
+    public SaveCommentResponseDto(
             Long id,
             String content,
             Long writerId,
@@ -31,7 +31,7 @@ public class CommentResponseDto {
         this.modifiedDate = modifiedDate;
     }
 
-    public static CommentResponseDto from(Comment comment) {
+    public static SaveCommentResponseDto from(Comment comment) {
         final Long id = comment.getId();
         final String content = comment.getContent();
         final Long writerId = comment.getWriterId();
@@ -39,7 +39,7 @@ public class CommentResponseDto {
         final Long postId = comment.getPost().getId();
         final LocalDateTime createdDate = comment.getCreatedDate();
         final LocalDateTime modifiedDate = comment.getModifiedDate();
-        return new CommentResponseDto(
+        return new SaveCommentResponseDto(
                 id, content, writerId, isAnonymous, postId, createdDate, modifiedDate);
     }
 
@@ -75,7 +75,7 @@ public class CommentResponseDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CommentResponseDto that = (CommentResponseDto) o;
+        SaveCommentResponseDto that = (SaveCommentResponseDto) o;
         return isAnonymous == that.isAnonymous
                 && Objects.equals(id, that.id)
                 && Objects.equals(content, that.content)
