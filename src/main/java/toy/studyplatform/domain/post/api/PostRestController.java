@@ -20,7 +20,7 @@ public class PostRestController {
     }
 
     @PostMapping("/api/posts")
-    public ResponseEntity<?> savePost(@Validated @RequestBody SavePostRequestDto dto) {
+    public ResponseEntity<PostResponseDto> savePost(@Validated @RequestBody SavePostRequestDto dto) {
         // TODO: 2022-05-15 reqeust header의 토큰값에서 사용자 정보 파싱한 뒤 entity에 추가
         Long writerId = 0L;
         PostResponseDto postResponseDto = postCreator.save(dto, writerId);
