@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import toy.studyplatform.auth.dto.CreateUserRequestDto;
-import toy.studyplatform.auth.dto.UserResponseDto;
+import toy.studyplatform.auth.dto.CreateUserResponseDto;
 import toy.studyplatform.auth.service.UserService;
 
 @RestController
@@ -21,9 +21,9 @@ public class UserController {
     }
 
     @PostMapping("/api/user")
-    public ResponseEntity<UserResponseDto> saveUser(
+    public ResponseEntity<CreateUserResponseDto> saveUser(
             @RequestBody @Valid CreateUserRequestDto createUserRequestDto) {
-        UserResponseDto userResponseDto = userService.save(createUserRequestDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(userResponseDto);
+        CreateUserResponseDto createUserResponseDto = userService.save(createUserRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createUserResponseDto);
     }
 }
