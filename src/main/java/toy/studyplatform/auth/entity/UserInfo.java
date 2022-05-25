@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import toy.studyplatform.common.entity.BaseTimeEntity;
 
@@ -14,17 +15,13 @@ public class UserInfo extends BaseTimeEntity {
 
     @Id @Column @GeneratedValue private Long userNo;
 
-    @Column(nullable = false)
-    private String id;
+    @Column @NotNull private String id;
 
-    @Column(nullable = false)
-    private String pw;
+    @Column @NotNull private String pw;
 
-    @Column(nullable = false)
-    private String name;
+    @Column @NotNull private String name;
 
-    @Column(nullable = false)
-    private String role;
+    @Column @NotNull private String role;
 
     public static Builder builder() {
         return new Builder();
