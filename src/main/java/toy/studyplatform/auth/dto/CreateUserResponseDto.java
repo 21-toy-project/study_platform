@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import toy.studyplatform.auth.entity.UserInfo;
 
-public class UserResponseDto {
+public class CreateUserResponseDto {
     private Long userNo;
     private String id;
     private String pw;
@@ -12,7 +12,7 @@ public class UserResponseDto {
     private String role;
     private LocalDateTime createdDate;
 
-    public UserResponseDto(
+    public CreateUserResponseDto(
             Long userNo, String id, String pw, String name, String role, LocalDateTime createdDate) {
         this.userNo = userNo;
         this.id = id;
@@ -22,19 +22,19 @@ public class UserResponseDto {
         this.createdDate = createdDate;
     }
 
-    public static UserResponseDto from(UserInfo userInfo) {
+    public static CreateUserResponseDto from(UserInfo userInfo) {
         final Long userNo = userInfo.getUserNo();
         final String id = userInfo.getId();
         final String pw = userInfo.getPw();
         final String name = userInfo.getName();
         final String role = userInfo.getRole();
         final LocalDateTime createdDate = userInfo.getCreatedDate();
-        return new UserResponseDto(userNo, id, pw, name, role, createdDate);
+        return new CreateUserResponseDto(userNo, id, pw, name, role, createdDate);
     }
 
     @Override
     public String toString() {
-        return "UserResponseDto{"
+        return "CreateUserResponseDto{"
                 + "userNo="
                 + userNo
                 + ", id='"
