@@ -3,6 +3,7 @@ package toy.studyplatform.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,6 +24,18 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/css/**", "/js/**");
         web.ignoring().antMatchers("/api/**");
         web.ignoring().antMatchers("/h2-console/**"); // h2 console 허용
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable().authorizeHttpRequests()
+                .antMatchers("/login*/**").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .and()
+                .httpBasic();
     }
 
     /** 비밀번호 암호화 관련 설정 */
