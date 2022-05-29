@@ -12,7 +12,7 @@ public class CreateUserRequestDto {
     @JsonProperty @NotBlank private String name;
     @JsonProperty @NotBlank private String role;
 
-    private CreateUserRequestDto(String id, String pw, String name, String role) {
+    public CreateUserRequestDto(String id, String pw, String name, String role) {
         this.id = id;
         this.pw = pw;
         this.name = name;
