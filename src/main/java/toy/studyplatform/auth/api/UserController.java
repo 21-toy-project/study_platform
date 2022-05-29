@@ -29,6 +29,5 @@ public class UserController {
     }
 
     @GetMapping("/admin")
-    public void adminTest(){
-    }
+    public void adminTest() {}
 }
