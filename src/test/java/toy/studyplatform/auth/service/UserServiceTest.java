@@ -10,20 +10,22 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import toy.studyplatform.auth.dto.CreateUserRequestDto;
+import toy.studyplatform.auth.entity.Role;
 import toy.studyplatform.auth.entity.UserInfo;
 
 @SpringBootTest
 class UserServiceTest {
     @Autowired UserService userService;
 
-    private String id, pw, name, role;
+    private String id, pw, name;
+    private Role role;
 
     @BeforeEach
     public void 유저세팅() {
         id = "test1";
         pw = "123";
         name = "jaehee";
-        role = "ROLE_ADMIN";
+        role = Role.ROLE_ADMIN;
         CreateUserRequestDto createUserRequestDto = new CreateUserRequestDto(id, pw, name, role);
         userService.save(createUserRequestDto);
     }
