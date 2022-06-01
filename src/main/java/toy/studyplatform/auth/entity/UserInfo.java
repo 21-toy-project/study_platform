@@ -21,7 +21,7 @@ public class UserInfo extends BaseTimeEntity {
 
     @Column @NotNull private String name;
 
-    @Column @NotNull private String role;
+    @Column @NotNull private Role role;
 
     public static Builder builder() {
         return new Builder();
@@ -31,7 +31,7 @@ public class UserInfo extends BaseTimeEntity {
         private String id;
         private String pw;
         private String name;
-        private String role;
+        private Role role;
 
         private Builder() {}
 
@@ -50,14 +50,14 @@ public class UserInfo extends BaseTimeEntity {
             return this;
         }
 
-        public Builder role(String role) {
+        public Builder role(Role role) {
             this.role = role;
             return this;
         }
 
         public UserInfo build() {
             UserInfo userInfo = new UserInfo();
-            if (id.isEmpty() || pw.isEmpty() || name.isEmpty() || role.isEmpty()) {
+            if (id.isEmpty() || pw.isEmpty() || name.isEmpty()) {
                 return null;
             }
             userInfo.id = id;
@@ -76,7 +76,7 @@ public class UserInfo extends BaseTimeEntity {
         return pw;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 

@@ -2,6 +2,7 @@ package toy.studyplatform.auth.dto;
 
 import java.time.LocalDateTime;
 
+import toy.studyplatform.auth.entity.Role;
 import toy.studyplatform.auth.entity.UserInfo;
 
 public class CreateUserResponseDto {
@@ -9,11 +10,11 @@ public class CreateUserResponseDto {
     private String id;
     private String pw;
     private String name;
-    private String role;
+    private Role role;
     private LocalDateTime createdDate;
 
     public CreateUserResponseDto(
-            Long userNo, String id, String pw, String name, String role, LocalDateTime createdDate) {
+            Long userNo, String id, String pw, String name, Role role, LocalDateTime createdDate) {
         this.userNo = userNo;
         this.id = id;
         this.pw = pw;
@@ -27,7 +28,7 @@ public class CreateUserResponseDto {
         final String id = userInfo.getId();
         final String pw = userInfo.getPw();
         final String name = userInfo.getName();
-        final String role = userInfo.getRole();
+        final Role role = userInfo.getRole();
         final LocalDateTime createdDate = userInfo.getCreatedDate();
         return new CreateUserResponseDto(userNo, id, pw, name, role, createdDate);
     }
