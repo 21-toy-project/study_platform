@@ -8,4 +8,6 @@ import toy.studyplatform.auth.entity.UserInfo;
 @Repository
 public interface UserRepository extends JpaRepository<UserInfo, Long> {
     UserInfo findById(String id);
+
+    boolean existsById(String id);
 }

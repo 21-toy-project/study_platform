@@ -24,4 +24,8 @@ public class UserService {
     public UserInfo findById(String id) {
         return userRepository.findById(id);
     }
+
+    public boolean checkIdDuplicate(String id) {
+        return userRepository.existsById(id);
+    }
 }
