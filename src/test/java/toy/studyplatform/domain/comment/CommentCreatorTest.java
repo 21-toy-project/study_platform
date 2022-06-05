@@ -20,10 +20,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import toy.studyplatform.domain.comment.dto.SaveCommentRequestDto;
 import toy.studyplatform.domain.comment.dto.SaveCommentResponseDto;
 import toy.studyplatform.domain.comment.entity.Comment;
-import toy.studyplatform.domain.comment.repository.CommentRepository;
+import toy.studyplatform.domain.comment.repository.jpa.CommentRepository;
 import toy.studyplatform.domain.comment.service.CommentCreator;
 import toy.studyplatform.domain.post.entity.Post;
-import toy.studyplatform.domain.post.repository.PostRepository;
+import toy.studyplatform.domain.post.repository.jpa.PostRepository;
 
 @ExtendWith(MockitoExtension.class)
 @TestPropertySource("classpath:application-test.properties")

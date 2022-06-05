@@ -22,8 +22,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import toy.studyplatform.domain.post.dto.SavePostRequestDto;
-import toy.studyplatform.domain.post.dto.SavePostResponseDto;
+import toy.studyplatform.domain.post.dto.request.SavePostRequestDto;
+import toy.studyplatform.domain.post.dto.response.SavePostResponseDto;
 import toy.studyplatform.domain.post.entity.Post;
 import toy.studyplatform.domain.post.service.PostCreator;
 

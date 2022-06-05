@@ -14,9 +14,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import static org.junit.jupiter.api.Assertions.*;
 
 import toy.studyplatform.domain.comment.entity.Comment;
-import toy.studyplatform.domain.comment.repository.CommentRepository;
+import toy.studyplatform.domain.comment.repository.jpa.CommentRepository;
 import toy.studyplatform.domain.post.entity.Post;
-import toy.studyplatform.domain.post.repository.PostRepository;
+import toy.studyplatform.domain.post.repository.jpa.PostRepository;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest

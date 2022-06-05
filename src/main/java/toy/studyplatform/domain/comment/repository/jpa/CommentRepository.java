@@ -1,4 +1,4 @@
-package toy.studyplatform.domain.comment.repository;
+package toy.studyplatform.domain.comment.repository.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

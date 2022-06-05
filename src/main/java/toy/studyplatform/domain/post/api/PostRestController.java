@@ -1,22 +1,29 @@
 package toy.studyplatform.domain.post.api;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import toy.studyplatform.domain.post.dto.SavePostRequestDto;
-import toy.studyplatform.domain.post.dto.SavePostResponseDto;
+import toy.studyplatform.domain.post.dto.request.SavePostRequestDto;
+import toy.studyplatform.domain.post.dto.response.FindPostResponseSimpleDto;
+import toy.studyplatform.domain.post.dto.response.SavePostResponseDto;
 import toy.studyplatform.domain.post.service.PostCreator;
+import toy.studyplatform.domain.post.service.PostReader;
 
 @RestController
 public class PostRestController {
-    private PostCreator postCreator;
+    private final PostCreator postCreator;
+    private final PostReader postReader;
 
-    public PostRestController(PostCreator postCreator) {
+    public PostRestController(PostCreator postCreator, PostReader postReader) {
         this.postCreator = postCreator;
+        this.postReader = postReader;
     }
 
     @PostMapping("/api/posts")
@@ -26,5 +33,11 @@ public class PostRestController {
         Long writerId = 0L;
         SavePostResponseDto savePostResponseDto = postCreator.save(dto, writerId);
         return ResponseEntity.status(HttpStatus.CREATED).body(savePostResponseDto);
+    }
+
+    @GetMapping("/api/posts")
+    public ResponseEntity<List<FindPostResponseSimpleDto>> findAllPosts() {
+        List<FindPostResponseSimpleDto> findPostResponseSimpleDtos = postReader.findAllPosts();
+        return ResponseEntity.status(HttpStatus.OK).body(findPostResponseSimpleDtos);
     }
 }

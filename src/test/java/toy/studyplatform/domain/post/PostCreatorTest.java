@@ -17,10 +17,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import toy.studyplatform.domain.post.dto.SavePostRequestDto;
-import toy.studyplatform.domain.post.dto.SavePostResponseDto;
+import toy.studyplatform.domain.post.dto.request.SavePostRequestDto;
+import toy.studyplatform.domain.post.dto.response.SavePostResponseDto;
 import toy.studyplatform.domain.post.entity.Post;
-import toy.studyplatform.domain.post.repository.PostRepository;
+import toy.studyplatform.domain.post.repository.jpa.PostRepository;
 import toy.studyplatform.domain.post.service.PostCreator;
 
 @ExtendWith(MockitoExtension.class)
