@@ -1,4 +1,4 @@
-package toy.studyplatform.domain.post.dto;
+package toy.studyplatform.domain.post.dto.response;
 
 import java.time.LocalDateTime;
 
