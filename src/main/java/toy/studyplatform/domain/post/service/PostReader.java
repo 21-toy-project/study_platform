@@ -9,6 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import toy.studyplatform.domain.comment.repository.jpa.CommentRepository;
 import toy.studyplatform.domain.post.dto.response.FindPostResponseSimpleDto;
 import toy.studyplatform.domain.post.entity.Post;
 import toy.studyplatform.domain.post.repository.jpa.PostRepository;
@@ -17,9 +18,11 @@ import toy.studyplatform.domain.post.repository.jpa.PostRepository;
 @Transactional(readOnly = true)
 public class PostReader {
     private final PostRepository postRepository;
+    private final CommentRepository commentRepository;
 
-    public PostReader(PostRepository postRepository) {
+    public PostReader(PostRepository postRepository, CommentRepository commentRepository) {
         this.postRepository = postRepository;
+        this.commentRepository = commentRepository;
     }
 
     public List<FindPostResponseSimpleDto> findAllPosts(
@@ -30,5 +33,9 @@ public class PostReader {
                                 FindPostResponseSimpleDto.from(
                                         Objects.requireNonNull(tuple.get(0, Post.class)), tuple.get(1, Long.class)))
                 .collect(Collectors.toList());
+    }
+
+    public Post findPost(Long postId) {
+        return postRepository.findById(postId).orElse(null);
     }
 }
