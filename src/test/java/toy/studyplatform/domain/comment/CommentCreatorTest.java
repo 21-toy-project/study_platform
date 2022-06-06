@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.util.ReflectionTestUtils;
 
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import toy.studyplatform.config.TestConfig;
 import toy.studyplatform.domain.comment.dto.SaveCommentRequestDto;
 import toy.studyplatform.domain.comment.dto.SaveCommentResponseDto;
 import toy.studyplatform.domain.comment.entity.Comment;
@@ -27,6 +29,7 @@ import toy.studyplatform.domain.post.repository.jpa.PostRepository;
 
 @ExtendWith(MockitoExtension.class)
 @TestPropertySource("classpath:application-test.properties")
+@Import(TestConfig.class)
 public class CommentCreatorTest {
     @Mock private PostRepository postRepository;
 
