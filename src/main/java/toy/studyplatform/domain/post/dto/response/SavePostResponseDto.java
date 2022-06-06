@@ -1,4 +1,4 @@
-package toy.studyplatform.domain.post.dto;
+package toy.studyplatform.domain.post.dto.response;
 
 import java.time.LocalDateTime;
 
@@ -11,6 +11,8 @@ public class SavePostResponseDto {
     private Long writerId;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
+
+    public SavePostResponseDto() {}
 
     public SavePostResponseDto(
             Long id,

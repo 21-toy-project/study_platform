@@ -2,6 +2,7 @@ package toy.studyplatform.domain.comment;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -13,14 +14,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import toy.studyplatform.config.TestConfig;
 import toy.studyplatform.domain.comment.entity.Comment;
-import toy.studyplatform.domain.comment.repository.CommentRepository;
+import toy.studyplatform.domain.comment.repository.jpa.CommentRepository;
 import toy.studyplatform.domain.post.entity.Post;
-import toy.studyplatform.domain.post.repository.PostRepository;
+import toy.studyplatform.domain.post.repository.jpa.PostRepository;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 @TestPropertySource("classpath:application-test.properties")
+@Import(TestConfig.class)
 public class CommentRepositoryTest {
     @Autowired private CommentRepository commentRepository;
 

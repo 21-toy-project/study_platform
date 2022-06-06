@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -22,6 +23,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import toy.studyplatform.config.TestConfig;
 import toy.studyplatform.domain.comment.dto.SaveCommentRequestDto;
 import toy.studyplatform.domain.comment.dto.SaveCommentResponseDto;
 import toy.studyplatform.domain.comment.entity.Comment;
@@ -32,6 +34,7 @@ import toy.studyplatform.domain.post.entity.Post;
 @AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
 @TestPropertySource("classpath:application-test.properties")
+@Import(TestConfig.class)
 public class CommentRestControllerMockMvcTest {
     @Autowired private MockMvc mockMvc;
     @MockBean private CommentCreator commentCreator;
