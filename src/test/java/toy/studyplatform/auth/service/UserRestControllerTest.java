@@ -24,7 +24,7 @@ import toy.studyplatform.auth.entity.Role;
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
 @ContextConfiguration
-public class UserIdExistsTest {
+public class UserRestControllerTest {
     @Autowired UserService userService;
     @Autowired MockMvc mockMvc;
 

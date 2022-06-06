@@ -17,7 +17,9 @@ import toy.studyplatform.auth.entity.UserInfo;
 class UserServiceTest {
     @Autowired UserService userService;
 
-    private String id, pw, name;
+    private String id;
+    private String pw;
+    private String name;
     private Role role;
 
     @BeforeEach
