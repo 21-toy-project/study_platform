@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 
-import org.springframework.web.bind.annotation.*;
 import toy.studyplatform.domain.post.dto.request.SavePostRequestDto;
 import toy.studyplatform.domain.post.dto.response.FindPostResponseSimpleDto;
 import toy.studyplatform.domain.post.dto.response.SavePostResponseDto;
