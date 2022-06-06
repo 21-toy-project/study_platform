@@ -10,13 +10,15 @@ public class SavePostRequestDto {
     @JsonProperty @NotBlank private String title;
     @JsonProperty @NotBlank private String content;
 
-    public static SavePostRequestDto of(String title, String content) {
-        return new SavePostRequestDto(title, content);
-    }
+    public SavePostRequestDto() {}
 
     private SavePostRequestDto(String title, String content) {
         this.title = title;
         this.content = content;
+    }
+
+    public static SavePostRequestDto of(String title, String content) {
+        return new SavePostRequestDto(title, content);
     }
 
     public Post toEntity(Long writerId) {

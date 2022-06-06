@@ -12,6 +12,8 @@ public class SavePostResponseDto {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
+    public SavePostResponseDto() {}
+
     public SavePostResponseDto(
             Long id,
             String title,
