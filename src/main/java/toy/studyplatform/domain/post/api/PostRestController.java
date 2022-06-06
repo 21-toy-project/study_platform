@@ -2,6 +2,7 @@ package toy.studyplatform.domain.post.api;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -36,8 +37,8 @@ public class PostRestController {
     }
 
     @GetMapping("/api/posts")
-    public ResponseEntity<List<FindPostResponseSimpleDto>> findAllPosts() {
-        List<FindPostResponseSimpleDto> findPostResponseSimpleDtos = postReader.findAllPosts();
+    public ResponseEntity<List<FindPostResponseSimpleDto>> findAllPosts(Pageable pageable) {
+        List<FindPostResponseSimpleDto> findPostResponseSimpleDtos = postReader.findAllPosts(pageable);
         return ResponseEntity.status(HttpStatus.OK).body(findPostResponseSimpleDtos);
     }
 }
