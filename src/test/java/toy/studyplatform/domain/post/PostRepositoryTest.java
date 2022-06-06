@@ -43,9 +43,9 @@ public class PostRepositoryTest {
 
         Post savedPost = postRepository.save(post);
 
-        assertEquals(savedPost.getTitle(), title);
-        assertEquals(savedPost.getContent(), content);
-        assertEquals(savedPost.getWriterId(), writerId);
+        assertEquals(title, savedPost.getTitle());
+        assertEquals(content, savedPost.getContent());
+        assertEquals(writerId, savedPost.getWriterId());
     }
 
     @Test
@@ -82,21 +82,21 @@ public class PostRepositoryTest {
         List<Tuple> actualPostList = postRepository.findAllWithComments(pageable);
 
         // then
-        assertEquals(actualPostList.size(), 2);
+        assertEquals(2, actualPostList.size());
 
         Post actualPost1 = actualPostList.get(1).get(0, Post.class);
         Long actualCountOfComments1 = actualPostList.get(1).get(1, Long.class);
-        assertEquals(actualPost1.getTitle(), post1.getTitle());
-        assertEquals(actualPost1.getWriterId(), post1.getWriterId());
-        assertEquals(actualPost1.getCreatedDate(), post1.getCreatedDate());
-        assertEquals(actualCountOfComments1, 1L);
+        assertEquals(post1.getTitle(), actualPost1.getTitle());
+        assertEquals(post1.getWriterId(), actualPost1.getWriterId());
+        assertEquals(post1.getCreatedDate(), actualPost1.getCreatedDate());
+        assertEquals(1L, actualCountOfComments1);
 
         Post actualPost2 = actualPostList.get(0).get(0, Post.class);
         Long actualCountOfComments2 = actualPostList.get(0).get(1, Long.class);
-        assertEquals(actualPost2.getTitle(), post2.getTitle());
-        assertEquals(actualPost2.getWriterId(), post2.getWriterId());
-        assertEquals(actualPost2.getCreatedDate(), post2.getCreatedDate());
-        assertEquals(actualCountOfComments2, 0L);
+        assertEquals(post2.getTitle(), actualPost2.getTitle());
+        assertEquals(post2.getWriterId(), actualPost2.getWriterId());
+        assertEquals(post2.getCreatedDate(), actualPost2.getCreatedDate());
+        assertEquals(0L, actualCountOfComments2);
     }
 
     @Test
@@ -116,7 +116,7 @@ public class PostRepositoryTest {
         List<Tuple> actualPostList = postRepository.findAllWithComments(pageable);
 
         // then
-        assertEquals(actualPostList.size(), 5);
+        assertEquals(5, actualPostList.size());
     }
 
     @AfterEach
